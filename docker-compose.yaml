@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  database:
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=hello
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_USER=postgres
+    volumes:
+      - ./database/migration.sql:/docker-entrypoint-initdb.d/migration.sql
+
+  backend:
+    build: ./backend
+    ports:
+      - 8000:8000
+    environment:
+      - connectionString=postgresql://postgres:docker@database:5432/hello
+      - PORT=8000
+    depends_on:
+      - database
+
+  frontend:
+    build: ./frontend
+    ports:
+      - 9000:9000
+    environment:
+      - PORT=9000
+    depends_on:
+      - backend

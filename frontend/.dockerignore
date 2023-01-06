@@ -1,0 +1,7 @@
+node_modules
+src
+public
+.gitignore
+Dockerfile
+index.html
+vite.config.js
