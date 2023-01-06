@@ -2,10 +2,6 @@
 
 Set up:
 
-Within /frontend:
-
-- npm run build
-
-Then within root directory:
+Within root directory:
 
 - docker compose up
